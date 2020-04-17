@@ -1,0 +1,5 @@
+name: 'Robot Reporter'
+description: 'Parses test results and sends them as comment to that specific commit that triggered tests'
+runs:
+  using: 'docker'
+  image: docker://joonvena/robot-reporter:latest
