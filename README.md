@@ -1,6 +1,8 @@
 # Robot Framework Reporter Action
 
-This action creates parsed report about the test run and sends it as comment to that specific commit that triggered the action.
+This action creates parsed report about the test run and sends it as comment to that specific commit that triggered the action.  
+
+![Example](example.png)  
 
 ## Example usage
 
