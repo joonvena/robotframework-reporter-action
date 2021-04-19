@@ -14,8 +14,8 @@ This action creates parsed report about the test run and sends it as comment to 
           run: |
             export OWNER="$(echo "${{ github.repository }}" | awk -F / '{print $1}' | sed -e "s/:refs//")"
             export REPO="$(echo "${{ github.repository }}" | awk -F / '{print $2}' | sed -e "s/:refs//")"
-            echo "::set-env name=REPOSITORY_OWNER::$OWNER"
-            echo "::set-env name=REPOSITORY_NAME::$REPO"
+            echo "REPOSITORY_OWNER=$OWNER" >> $GITHUB_ENV
+            echo "REPOSITORY_NAME=$REPO" >> $GITHUB_ENV
         - name: Send report to commit
           uses: joonvena/robotframework-reporter-action@v0.1
           env:
