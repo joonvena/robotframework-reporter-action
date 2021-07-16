@@ -10,35 +10,54 @@ This action creates parsed report about the test run and sends it as comment to 
 ```jobs:
    generate_report:
         runs-on: ubuntu-latest
-        - name: Get Repository Owner & Name
-          run: |
-            export OWNER="$(echo "${{ github.repository }}" | awk -F / '{print $1}' | sed -e "s/:refs//")"
-            export REPO="$(echo "${{ github.repository }}" | awk -F / '{print $2}' | sed -e "s/:refs//")"
-            echo "REPOSITORY_OWNER=$OWNER" >> $GITHUB_ENV
-            echo "REPOSITORY_NAME=$REPO" >> $GITHUB_ENV
+        steps:
+        - uses: actions/checkout@v2
+        - name: Download reports
+          uses: actions/download-artifact@v1
+          with:
+            name: reports
         - name: Send report to commit
-          uses: joonvena/robotframework-reporter-action@v0.1
-          env:
-            GH_ACCESS_TOKEN: ${{ secrets.TOKEN }}
-            REPO_OWNER: ${{ env.REPOSITORY_OWNER }}
-            COMMIT_SHA: ${{ github.sha }}
-            REPOSITORY: ${{ env.REPOSITORY_NAME }}
-            REPORT_PATH: ${{ github.workspace }}/reports
+          uses: joonvena/robotframework-reporter-action@v1.0
+          with:
+            gh_access_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-Get repository Owner & Name step is not needed you can define these as secrets also if you like.
+## Example usage with [robotframework-docker-action](https://github.com/marketplace/actions/robot-framework)
 
-`GH_ACCESS_TOKEN`
-Token to access github api
+```jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Execute tests
+          uses: joonvena/robotframework-docker-action@v1.0
+        - name: Upload test results
+          uses: actions/upload-artifact@v1
+          if: always()
+          with:
+            name: reports
+            path: reports
+    
+    generate_report:
+        if: always()
+        needs: [test] 
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Download reports
+          uses: actions/download-artifact@v1
+          with:
+            name: reports
+        - name: Send report to commit
+          uses: joonvena/robotframework-reporter-action@v1.0
+          with:
+            gh_access_token: ${{ secrets.GITHUB_TOKEN }}
+```
 
-`REPO_OWNER`
-Owner of the repository
+Available settings:
 
-`COMMIT_SHA`
-SHA of commit that triggered the action
-
-`REPOSITORY`
-Repository name
-
-`REPORT_PATH`
-Path where the report output is
+| Name                     | Default            | Description                                                                                                   |
+| ------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| gh_access_token          |                    | Token to access GH API. In most cases you can use GITHUB_TOKEN that is available in the workflow              |
+| report_path              | 'reports'          | Path to reports from the download artifact action                                                             |
+| sha                      | ${{ github.sha }}  | SHA of the commit that triggered the tests                                                                    |
