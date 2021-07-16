@@ -1,5 +1,32 @@
 name: 'Robot Reporter'
-description: 'Parses test results and sends them as comment to that specific commit that triggered tests'
+description: 'Parses robot framework test reports and outputs the results in commit that triggered the tests'
+inputs:
+  gh_access_token:
+    description: 'Token to access the API'
+    required: true
+  report_path:
+    description: 'Path to report'
+    required: true
+    default: 'reports'
+  sha:
+    description: 'SHA of the commit tha triggered the tests'
+    required: true
+    default: "${{ github.sha }}"
+
 runs:
-  using: 'docker'
-  image: docker://joonvena/robot-reporter:latest
+  using: 'composite'
+  steps:
+    - shell: bash
+      run: |
+            export OWNER="$(echo "${{ github.repository }}" | awk -F / '{print $1}' | sed -e "s/:refs//")"
+            export REPO="$(echo "${{ github.repository }}" | awk -F / '{print $2}' | sed -e "s/:refs//")"
+            echo "REPOSITORY_OWNER=$OWNER" >> $GITHUB_ENV
+            echo "REPOSITORY_NAME=$REPO" >> $GITHUB_ENV
+    - shell: bash
+      run: ${{ github.action_path }}/report.sh
+      env:
+        GH_ACCESS_TOKEN: ${{ inputs.gh_access_token }}
+        REPORT_PATH: ${{ inputs.report_path }}
+        REPOSITORY_OWNER: "${{ env.REPOSITORY_OWNER }}"
+        REPOSITORY: "${{ env.REPOSITORY_NAME }}"
+        COMMIT_SHA: "${{ github.sha }}"
