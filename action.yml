@@ -29,4 +29,4 @@ runs:
         REPORT_PATH: ${{ inputs.report_path }}
         REPOSITORY_OWNER: "${{ env.REPOSITORY_OWNER }}"
         REPOSITORY: "${{ env.REPOSITORY_NAME }}"
-        COMMIT_SHA: "${{ github.sha }}"
+        COMMIT_SHA: "${{ inputs.sha }}"
