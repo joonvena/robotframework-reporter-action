@@ -17,7 +17,7 @@ This action creates parsed report about the test run and sends it as comment to 
           with:
             name: reports
         - name: Send report to commit
-          uses: joonvena/robotframework-reporter-action@v1.0
+          uses: joonvena/robotframework-reporter-action@v1.1
           with:
             gh_access_token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -49,7 +49,7 @@ This action creates parsed report about the test run and sends it as comment to 
           with:
             name: reports
         - name: Send report to commit
-          uses: joonvena/robotframework-reporter-action@v1.0
+          uses: joonvena/robotframework-reporter-action@v1.1
           with:
             gh_access_token: ${{ secrets.GITHUB_TOKEN }}
 ```
