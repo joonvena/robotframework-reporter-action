@@ -10,8 +10,12 @@ inputs:
     default: 'reports'
   sha:
     description: 'SHA of the commit tha triggered the tests'
-    required: true
+    required: false
     default: "${{ github.sha }}"
+  pull_request_id:
+    description: 'ID of the Pull Request'
+    required: false
+    default: "${{ github.event.number }}"
 
 runs:
   using: 'composite'
@@ -26,7 +30,8 @@ runs:
       run: ${{ github.action_path }}/report.sh
       env:
         GH_ACCESS_TOKEN: ${{ inputs.gh_access_token }}
-        REPORT_PATH: ${{ inputs.report_path }}
+        REPORT_PATH: ${{ inputs.report_path }}
         REPOSITORY_OWNER: "${{ env.REPOSITORY_OWNER }}"
         REPOSITORY: "${{ env.REPOSITORY_NAME }}"
         COMMIT_SHA: "${{ inputs.sha }}"
+        PR_ID: "${{ inputs.pull_request_id }}"

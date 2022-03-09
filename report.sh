@@ -5,7 +5,8 @@ docker run \
   -e REPO_OWNER=$REPOSITORY_OWNER \
   -e REPOSITORY=$REPOSITORY \
   -e COMMIT_SHA=$COMMIT_SHA \
+  -e PR_ID=$PR_ID \
   -e REPORT_PATH="/reports" \
   -v $REPORT_PATH:/reports:Z \
   --user $(id -u):$(id -g) \
-  joonvena/robot-reporter:latest
+  joonvena/robot-reporter:v2
