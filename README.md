@@ -1,11 +1,10 @@
 # Robot Framework Reporter Action
 
-This action creates parsed report about the test run and sends it as comment to that specific commit that triggered the action.  
+This action reads and parses output.xml from Robot Framework test run and outputs it. By default action checks if `pull_request_id` is defined and outputs the report to the found pull request. If it doesn't find `pull_request_id` then it will use the `sha` value by default. These both values can be overwritten by user to have more control.
 
 ![Example](example.png)  
 
 ## Example usage
-
 
 ```jobs:
    generate_report:
@@ -17,7 +16,7 @@ This action creates parsed report about the test run and sends it as comment to 
           with:
             name: reports
         - name: Send report to commit
-          uses: joonvena/robotframework-reporter-action@v1.1
+          uses: joonvena/robotframework-reporter-action@v2
           with:
             gh_access_token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -49,15 +48,16 @@ This action creates parsed report about the test run and sends it as comment to 
           with:
             name: reports
         - name: Send report to commit
-          uses: joonvena/robotframework-reporter-action@v1.1
+          uses: joonvena/robotframework-reporter-action@v2
           with:
             gh_access_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 Available settings:
 
-| Name                     | Default            | Description                                                                                                   |
-| ------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------- |
-| gh_access_token          |                    | Token to access GH API. In most cases you can use GITHUB_TOKEN that is available in the workflow              |
-| report_path              | 'reports'          | Path to reports from the download artifact action                                                             |
-| sha                      | ${{ github.sha }}  | SHA of the commit that triggered the tests                                                                    |
+| Name                     | Default                                 | Description                                                                                                   |
+| ------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| gh_access_token          |                                         | Token to access GH API. In most cases you can use GITHUB_TOKEN that is available in the workflow              |
+| report_path              | 'reports'                               | Path to reports from the download artifact action                                                             |
+| sha                      | ${{ github.sha }}                       | SHA of the commit that triggered the tests                                                                    |
+| pull_request_id          | ${{ github.event.number }}              | ID of the pull request that triggered pipeline                                                                |
