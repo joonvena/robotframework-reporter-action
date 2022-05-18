@@ -48,7 +48,7 @@ This action reads and parses output.xml from Robot Framework test run and output
           with:
             name: reports
         - name: Send report to commit
-          uses: joonvena/robotframework-reporter-action@v2
+          uses: joonvena/robotframework-reporter-action@v2.1
           with:
             gh_access_token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -61,3 +61,4 @@ Available settings:
 | report_path              | 'reports'                               | Path to reports from the download artifact action                                                             |
 | sha                      | ${{ github.sha }}                       | SHA of the commit that triggered the tests                                                                    |
 | pull_request_id          | ${{ github.event.number }}              | ID of the pull request that triggered pipeline                                                                |
+| summary                  | 'true'                                  | Add report to job summary                                                                                     |
