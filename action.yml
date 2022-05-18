@@ -16,6 +16,10 @@ inputs:
     description: 'ID of the Pull Request'
     required: false
     default: "${{ github.event.number }}"
+  summary:
+    description: 'Add report to job summary'
+    required: false
+    default: "true"
 
 runs:
   using: 'composite'
@@ -35,3 +39,5 @@ runs:
         REPOSITORY: "${{ env.REPOSITORY_NAME }}"
         COMMIT_SHA: "${{ inputs.sha }}"
         PR_ID: "${{ inputs.pull_request_id }}"
+        SUMMARY: "${{ inputs.summary }}"
+        GITHUB_STEP_SUMMARY: $GITHUB_STEP_SUMMARY
