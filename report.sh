@@ -7,6 +7,9 @@ docker run \
   -e COMMIT_SHA=$COMMIT_SHA \
   -e PR_ID=$PR_ID \
   -e REPORT_PATH="/reports" \
+  -e SUMMARY=$SUMMARY \
+  -e GITHUB_STEP_SUMMARY=$GITHUB_STEP_SUMMARY \
+  -v $GITHUB_STEP_SUMMARY:/$GITHUB_STEP_SUMMARY:Z \
   -v $REPORT_PATH:/reports:Z \
   --user $(id -u):$(id -g) \
-  joonvena/robot-reporter:v2
+  joonvena/robot-reporter:v2.1
