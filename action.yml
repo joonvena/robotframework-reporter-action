@@ -49,6 +49,5 @@ runs:
         PR_ID: "${{ inputs.pull_request_id }}"
         SUMMARY: "${{ inputs.summary }}"
         GITHUB_STEP_SUMMARY: $GITHUB_STEP_SUMMARY
-        SUMMARY: "${{ inputs.summary }}"
         ONLY_SUMMARY: "${{ inputs.only_summary }}"
         SHOW_PASSED_TESTS: "${{ inputs.show_passed_tests }}"
