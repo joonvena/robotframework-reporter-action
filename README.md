@@ -1,6 +1,6 @@
 # Robot Framework Reporter Action
 
-This action reads and parses output.xml from Robot Framework test run and outputs it. By default action checks if `pull_request_id` is defined and outputs the report to the found pull request. If it doesn't find `pull_request_id` then it will use the `sha` value by default. These both values can be overwritten by user to have more control.
+This action reads and parses output.xml from Robot Framework test run and outputs it. By default action checks if `pull_request_id` is defined and outputs the report to the found pull request. If it doesn't find `pull_request_id` then it will use the `sha` value by default. These both values can be overwritten by user to have more control. It will also supports outputting report to job summary.
 
 ![Example](example.png)  
 
@@ -62,3 +62,5 @@ Available settings:
 | sha                      | ${{ github.sha }}                       | SHA of the commit that triggered the tests                                                                    |
 | pull_request_id          | ${{ github.event.number }}              | ID of the pull request that triggered pipeline                                                                |
 | summary                  | 'true'                                  | Add report to job summary                                                                                     |
+| only_summary             | 'false'                                 | Only output report to job summary                                                                             |
+| show_passed_tests        | 'true'                                  | If true only failed tests are shown                                                                           |
