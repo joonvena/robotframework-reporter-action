@@ -20,6 +20,14 @@ inputs:
     description: 'Add report to job summary'
     required: false
     default: "true"
+  only_summary:
+    description: 'Only output report to job summary'
+    required: false
+    default: "false"
+  show_passed_tests:
+    description: 'If true only failed tests are shown'
+    required: false
+    default: "true"
 
 runs:
   using: 'composite'
@@ -41,3 +49,6 @@ runs:
         PR_ID: "${{ inputs.pull_request_id }}"
         SUMMARY: "${{ inputs.summary }}"
         GITHUB_STEP_SUMMARY: $GITHUB_STEP_SUMMARY
+        SUMMARY: "${{ inputs.summary }}"
+        ONLY_SUMMARY: "${{ inputs.only_summary }}"
+        SHOW_PASSED_TESTS: "${{ inputs.show_passed_tests }}"

@@ -9,6 +9,8 @@ docker run \
   -e REPORT_PATH="/reports" \
   -e SUMMARY=$SUMMARY \
   -e GITHUB_STEP_SUMMARY=$GITHUB_STEP_SUMMARY \
+  -e ONLY_SUMMARY=$ONLY_SUMMARY \
+  -e SHOW_PASSED_TESTS=$SHOW_PASSED_TESTS \
   -v $GITHUB_STEP_SUMMARY:/$GITHUB_STEP_SUMMARY:Z \
   -v $REPORT_PATH:/reports:Z \
   --user $(id -u):$(id -g) \
