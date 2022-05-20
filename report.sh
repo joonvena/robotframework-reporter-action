@@ -6,12 +6,12 @@ docker run \
   -e REPOSITORY=$REPOSITORY \
   -e COMMIT_SHA=$COMMIT_SHA \
   -e PR_ID=$PR_ID \
-  -e REPORT_PATH="/reports" \
+  -e REPORT_PATH=$REPORT_PATH \
   -e SUMMARY=$SUMMARY \
   -e GITHUB_STEP_SUMMARY=$GITHUB_STEP_SUMMARY \
   -e ONLY_SUMMARY=$ONLY_SUMMARY \
   -e SHOW_PASSED_TESTS=$SHOW_PASSED_TESTS \
   -v $GITHUB_STEP_SUMMARY:/$GITHUB_STEP_SUMMARY:Z \
-  -v $REPORT_PATH:/reports:Z \
+  -v $REPORT_PATH:/$REPORT_PATH:Z \
   --user $(id -u):$(id -g) \
   joonvena/robot-reporter:v2.1
