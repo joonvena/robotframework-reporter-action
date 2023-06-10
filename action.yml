@@ -51,3 +51,4 @@ runs:
         GITHUB_STEP_SUMMARY: $GITHUB_STEP_SUMMARY
         ONLY_SUMMARY: "${{ inputs.only_summary }}"
         SHOW_PASSED_TESTS: "${{ inputs.show_passed_tests }}"
+        GITHUB_API_URL: $GITHUB_API_URL
