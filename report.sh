@@ -15,4 +15,4 @@ docker run \
   -v $GITHUB_STEP_SUMMARY:/$GITHUB_STEP_SUMMARY:Z \
   -v $REPORT_PATH:/$REPORT_PATH:Z \
   --user $(id -u):$(id -g) \
-  joonvena/robot-reporter:v2.2
+  joonvena/robot-reporter:v2.3
