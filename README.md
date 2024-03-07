@@ -2,6 +2,9 @@
 
 This action reads and parses output.xml from Robot Framework test run and outputs it. By default action checks if `pull_request_id` is defined and outputs the report to the found pull request. If it doesn't find `pull_request_id` then it will use the `sha` value by default. These both values can be overwritten by user to have more control. It will also supports outputting report to job summary.
 
+## Note
+## If you are using RF version 7 or greater you need to use version 2.4 or greater of the action otherwise it will fail due changes in the `output.xml`.
+
 ![Example](example.png)  
 
 ## Example usage
@@ -48,7 +51,7 @@ This action reads and parses output.xml from Robot Framework test run and output
           with:
             name: reports
         - name: Send report to commit
-          uses: joonvena/robotframework-reporter-action@v2.3
+          uses: joonvena/robotframework-reporter-action@v2.4
           with:
             gh_access_token: ${{ secrets.GITHUB_TOKEN }}
 ```
