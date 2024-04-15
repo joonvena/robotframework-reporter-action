@@ -62,6 +62,7 @@ Available settings:
 | ------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | gh_access_token          |                                         | Token to access GH API. In most cases you can use GITHUB_TOKEN that is available in the workflow              |
 | report_path              | 'reports'                               | Path to reports from the download artifact action                                                             |
+| repository               | ${{ github.repository }}                | Repository containing the commit or pull request that triggered the tests                                     |
 | sha                      | ${{ github.sha }}                       | SHA of the commit that triggered the tests                                                                    |
 | pull_request_id          | ${{ github.event.number }}              | ID of the pull request that triggered pipeline                                                                |
 | summary                  | 'true'                                  | Add report to job summary                                                                                     |
