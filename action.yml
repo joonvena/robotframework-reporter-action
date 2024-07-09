@@ -1,43 +1,47 @@
-name: 'Robot Reporter'
-description: 'Parses robot framework test reports and outputs the results in commit that triggered the tests'
+name: "Robot Reporter"
+description: "Parses robot framework test reports and outputs the results in commit that triggered the tests"
 inputs:
   gh_access_token:
-    description: 'Token to access the API'
+    description: "Token to access the API"
     required: true
   report_path:
-    description: 'Path to report'
+    description: "Path to report"
     required: true
-    default: 'reports'
+    default: "reports"
   sha:
-    description: 'SHA of the commit tha triggered the tests'
+    description: "SHA of the commit tha triggered the tests"
     required: false
     default: "${{ github.sha }}"
   pull_request_id:
-    description: 'ID of the Pull Request'
+    description: "ID of the Pull Request"
     required: false
     default: "${{ github.event.number }}"
   summary:
-    description: 'Add report to job summary'
+    description: "Add report to job summary"
     required: false
     default: "true"
   only_summary:
-    description: 'Only output report to job summary'
+    description: "Only output report to job summary"
     required: false
     default: "false"
   show_passed_tests:
-    description: 'If true only failed tests are shown'
+    description: "If false only failed tests are shown"
     required: false
     default: "true"
+  failed_tests_on_top:
+    description: "If true failed tests are shown at the top of the report"
+    required: false
+    default: "false"
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - shell: bash
       run: |
-            export OWNER="$(echo "${{ github.repository }}" | awk -F / '{print $1}' | sed -e "s/:refs//")"
-            export REPO="$(echo "${{ github.repository }}" | awk -F / '{print $2}' | sed -e "s/:refs//")"
-            echo "REPOSITORY_OWNER=$OWNER" >> $GITHUB_ENV
-            echo "REPOSITORY_NAME=$REPO" >> $GITHUB_ENV
+        export OWNER='$(echo '${{ github.repository }}' | awk -F / '{print $1}' | sed -e 's/:refs//')'
+        export REPO='$(echo '${{ github.repository }}' | awk -F / '{print $2}' | sed -e 's/:refs//')'
+        echo 'REPOSITORY_OWNER=$OWNER' >> $GITHUB_ENV
+        echo 'REPOSITORY_NAME=$REPO' >> $GITHUB_ENV
     - shell: bash
       run: ${{ github.action_path }}/report.sh
       env:
@@ -52,3 +56,4 @@ runs:
         ONLY_SUMMARY: "${{ inputs.only_summary }}"
         SHOW_PASSED_TESTS: "${{ inputs.show_passed_tests }}"
         GITHUB_API_URL: $GITHUB_API_URL
+        FAILED_TESTS_ON_TOP: "${{ inputs.failed_tests_on_top }}"

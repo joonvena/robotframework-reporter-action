@@ -66,4 +66,5 @@ Available settings:
 | pull_request_id          | ${{ github.event.number }}              | ID of the pull request that triggered pipeline                                                                |
 | summary                  | 'true'                                  | Add report to job summary                                                                                     |
 | only_summary             | 'false'                                 | Only output report to job summary                                                                             |
-| show_passed_tests        | 'true'                                  | If true only failed tests are shown                                                                           |
+| show_passed_tests        | 'true'                                  | If false only failed tests are shown                                                                          |
+| failed_tests_on_top      | 'false'                                 | If true failed tests are shown at the top of the report                                                       |
