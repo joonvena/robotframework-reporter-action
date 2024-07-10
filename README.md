@@ -19,7 +19,7 @@ This action reads and parses output.xml from Robot Framework test run and output
           with:
             name: reports
         - name: Send report to commit
-          uses: joonvena/robotframework-reporter-action@v2
+          uses: joonvena/robotframework-reporter-action@v2.5
           with:
             gh_access_token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -51,7 +51,7 @@ This action reads and parses output.xml from Robot Framework test run and output
           with:
             name: reports
         - name: Send report to commit
-          uses: joonvena/robotframework-reporter-action@v2.4
+          uses: joonvena/robotframework-reporter-action@v2.5
           with:
             gh_access_token: ${{ secrets.GITHUB_TOKEN }}
 ```
