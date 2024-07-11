@@ -38,10 +38,10 @@ runs:
   steps:
     - shell: bash
       run: |
-        export OWNER='$(echo '${{ github.repository }}' | awk -F / '{print $1}' | sed -e 's/:refs//')'
-        export REPO='$(echo '${{ github.repository }}' | awk -F / '{print $2}' | sed -e 's/:refs//')'
-        echo 'REPOSITORY_OWNER=$OWNER' >> $GITHUB_ENV
-        echo 'REPOSITORY_NAME=$REPO' >> $GITHUB_ENV
+        export OWNER="$(echo '${{ github.repository }}' | awk -F / '{print $1}' | sed -e 's/:refs//')"
+        export REPO="$(echo '${{ github.repository }}' | awk -F / '{print $2}' | sed -e 's/:refs//')"
+        echo "REPOSITORY_OWNER=$OWNER" >> $GITHUB_ENV
+        echo "REPOSITORY_NAME=$REPO" >> $GITHUB_ENV
     - shell: bash
       run: ${{ github.action_path }}/report.sh
       env:
