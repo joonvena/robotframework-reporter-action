@@ -1,6 +1,6 @@
 REPORT_PATH=$(pwd)/$REPORT_PATH
 
-docker run \
+docker run --rm \
   -e GH_ACCESS_TOKEN=$GH_ACCESS_TOKEN \
   -e REPO_OWNER=$REPOSITORY_OWNER \
   -e REPOSITORY=$REPOSITORY \
